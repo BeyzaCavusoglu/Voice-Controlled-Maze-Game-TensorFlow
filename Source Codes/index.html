@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Controlled Pickle Rick Maze Game</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./audio.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+</head>
+<body>
+  <div id="help-section">
+    <h2>How to Play</h2>
+    <ul>
+      <li>Use the dropdown menu to select a difficulty level.</li>
+      <li>Click on the "Start" button to generate the maze.</li>
+      <li>Use voice commands "up, down, left, right" or swipe use keyboard arrows to navigate the maze.</li>
+      <li>Reach the end of the maze to win.</li>
+    </ul>
+  </div>
+  
+  <div id="console"></div>
+
+  <div id="gradient"></div>
+  <div id="page">
+    <div id="Message-Container">
+      <div id="message">
+        <h1>Congratulations!</h1>
+        <p>You are done.</p>
+        <p id="moves"></p>
+        <input id="okBtn" type="button" onclick="toggleVisablity('Message-Container')" value="Cool!" />
+      </div>
+    </div>
+    <div id="menu">    
+      <label class="form-switch">
+        <input type="checkbox" id="audio-switch">
+        <i></i> Microphone
+      </label>      
+      <div class="custom-select">
+        <select id="diffSelect">
+          <option value="10">Easy</option>
+          <option value="15">Medium</option>
+          <option value="25">Hard</option>
+          <option value="38">Extreme</option>                                      
+        </select>
+        <input id="startMazeBtn" type="button" onclick="makeMaze()" value="Start" />
+      </div> 
+      <button id="infoBtn">Info</button>
+    </div>        
+    <div id="view">
+      <div id="mazeContainer">
+        <canvas id="mazeCanvas" class="border" height="1100" width="1100"></canvas>     
+      </div>
+    </div>
+  </div>
+
+<style>
+  #recognized-word {
+    font-size: 50px;
+    color: blue;
+    font-family: Arial, sans-serif;
+  }
+</style>
+
+  
+  <div id="recognized-word"></div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+  <script src="speech_command.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Hide the help section by default
+      $('#help-section').hide();
+      
+      // Toggle the visibility of the help section when the "Info" button is clicked
+      $('#infoBtn').click(function() {
+        $('#help-section').toggle();
+      });
+    });
+  </script>
+</body>
+</html>
